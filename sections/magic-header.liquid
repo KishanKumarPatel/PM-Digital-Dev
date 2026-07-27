@@ -1,0 +1,367 @@
+{%- style -%}
+  .magic-header-{{ section.id }} {
+    background-color: {{ section.settings.bg_color | default: '#FFFFFF' }};
+    border-bottom: 1px solid #E5E5E5;
+    position: relative;
+    z-index: 10;
+    font-family: 'Circular Std', 'CircularStd', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  .magic-header-{{ section.id }} .magic-header__container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+  }
+
+  @media (min-width: 990px) {
+    .magic-header-{{ section.id }} .magic-header__container {
+      padding: 18px 60px;
+    }
+  }
+
+  .magic-header-{{ section.id }} .magic-header__left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  /* Hamburger Toggle Bar */
+  .magic-header-{{ section.id }} .magic-header__toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    padding: 4px;
+    margin: 0;
+    cursor: pointer;
+    color: #1A1A1A;
+  }
+
+  @media (min-width: 990px) {
+    .magic-header-{{ section.id }} .magic-header__toggle {
+      display: none;
+    }
+  }
+
+  .magic-header-{{ section.id }} .magic-header__logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+  }
+
+  .magic-header-{{ section.id }} .magic-header__logo-img {
+    height: 34px;
+    width: auto;
+    display: block;
+  }
+
+  @media (min-width: 990px) {
+    .magic-header-{{ section.id }} .magic-header__logo-img {
+      height: 38px;
+    }
+  }
+
+  /* Desktop Menu Navigation */
+  .magic-header-{{ section.id }} .magic-header__nav {
+    display: none;
+    align-items: center;
+    gap: 36px;
+  }
+
+  @media (min-width: 990px) {
+    .magic-header-{{ section.id }} .magic-header__nav {
+      display: flex;
+    }
+  }
+
+  .magic-header-{{ section.id }} .magic-header__nav-link {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1A1A1A;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .magic-header-{{ section.id }} .magic-header__nav-link:hover {
+    opacity: 0.7;
+  }
+
+  .magic-header-{{ section.id }} .magic-header__actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  @media (min-width: 990px) {
+    .magic-header-{{ section.id }} .magic-header__actions {
+      gap: 16px;
+    }
+  }
+
+  .magic-header-{{ section.id }} .magic-header__account-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    color: #1A1A1A;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .magic-header-{{ section.id }} .magic-header__account-icon:hover {
+    opacity: 0.7;
+  }
+
+  .magic-header-{{ section.id }} .magic-header__account-icon svg {
+    width: 24px;
+    height: 24px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 1.5;
+  }
+
+  .magic-header-{{ section.id }} .magic-header__cart-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 14px;
+    border: 1.5px solid #1A1A1A;
+    border-radius: 20px;
+    color: #1A1A1A;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  .magic-header-{{ section.id }} .magic-header__cart-btn:hover {
+    background-color: #1A1A1A;
+    color: #FFFFFF;
+  }
+
+  /* Mobile Navigation Drawer */
+  .magic-header-{{ section.id }} .magic-header__drawer {
+    display: none;
+    background-color: #FFFFFF;
+    border-top: 1px solid #E5E5E5;
+    padding: 16px 20px;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .magic-header-{{ section.id }} .magic-header__drawer.is-open {
+    display: flex;
+  }
+
+  @media (min-width: 990px) {
+    .magic-header-{{ section.id }} .magic-header__drawer {
+      display: none !important;
+    }
+  }
+
+  .magic-header-{{ section.id }} .magic-header__drawer-link {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1A1A1A;
+    text-decoration: none;
+    padding: 8px 0;
+    border-bottom: 1px solid #F0F0F0;
+  }
+{%- endstyle -%}
+
+<header class="magic-header magic-header-{{ section.id }}" id="Header-{{ section.id }}" role="banner">
+  <div class="magic-header__container">
+    
+    <div class="magic-header__left">
+      <!-- Hamburger Toggle Bar Icon -->
+      <button 
+        type="button" 
+        class="magic-header__toggle" 
+        aria-label="Toggle menu" 
+        aria-expanded="false"
+      >
+        <svg width="22" height="18" viewBox="0 0 22 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1 1.5H21M1 9H21M1 16.5H21" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+
+      <!-- Logo -->
+      <a href="{{ routes.root_url }}" class="magic-header__logo-link">
+        {% if section.settings.logo_image != blank %}
+          {{ section.settings.logo_image | image_url: width: 300 | image_tag: 
+            class: 'magic-header__logo-img',
+            alt: shop.name | escape 
+          }}
+        {% else %}
+          <img 
+            src="{{ 'magic-mind-logo.svg' | asset_url }}" 
+            alt="{{ shop.name | escape }}" 
+            class="magic-header__logo-img"
+            width="120"
+            height="42"
+          >
+        {% endif %}
+      </a>
+    </div>
+
+    <!-- Desktop Navigation -->
+    <nav class="magic-header__nav" aria-label="Main Navigation">
+      {% assign nav_menu = linklists[section.settings.menu] %}
+      {% if nav_menu.links.size > 0 %}
+        {% for link in nav_menu.links %}
+          <a href="{{ link.url }}" class="magic-header__nav-link">
+            {{ link.title | escape }}
+          </a>
+        {% endfor %}
+      {% else %}
+        <a href="{{ section.settings.link_1_url | default: '/collections/all' }}" class="magic-header__nav-link">
+          {{ section.settings.link_1_title | default: 'Shop' | escape }}
+        </a>
+        <a href="{{ section.settings.link_2_url | default: '#' }}" class="magic-header__nav-link">
+          {{ section.settings.link_2_title | default: 'Science' | escape }}
+        </a>
+        <a href="{{ section.settings.link_3_url | default: '#' }}" class="magic-header__nav-link">
+          {{ section.settings.link_3_title | default: 'Reviews' | escape }}
+        </a>
+      {% endif %}
+    </nav>
+
+    <!-- Header Actions (Account & Cart Pill) -->
+    <div class="magic-header__actions">
+      {% if shop.customer_accounts_enabled or section.settings.show_account %}
+        <a href="{{ routes.account_url | default: '/account' }}" class="magic-header__account-icon" aria-label="Account">
+          <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="8" r="4.5"/>
+            <path d="M4 20c0-3.5 3.5-6 8-6s8 2.5 8 6"/>
+          </svg>
+        </a>
+      {% endif %}
+
+      <a href="{{ routes.cart_url | default: '/cart' }}" class="magic-header__cart-btn">
+        <span>{{ cart.item_count | default: 0 }}</span>
+      </a>
+    </div>
+
+  </div>
+
+  <!-- Mobile Drawer Dropdown -->
+  <div class="magic-header__drawer">
+    {% assign nav_menu = linklists[section.settings.menu] %}
+    {% if nav_menu.links.size > 0 %}
+      {% for link in nav_menu.links %}
+        <a href="{{ link.url }}" class="magic-header__drawer-link">
+          {{ link.title | escape }}
+        </a>
+      {% endfor %}
+    {% else %}
+      <a href="{{ section.settings.link_1_url | default: '/collections/all' }}" class="magic-header__drawer-link">
+        {{ section.settings.link_1_title | default: 'Shop' | escape }}
+      </a>
+      <a href="{{ section.settings.link_2_url | default: '#' }}" class="magic-header__drawer-link">
+        {{ section.settings.link_2_title | default: 'Science' | escape }}
+      </a>
+      <a href="{{ section.settings.link_3_url | default: '#' }}" class="magic-header__drawer-link">
+        {{ section.settings.link_3_title | default: 'Reviews' | escape }}
+      </a>
+    {% endif %}
+  </div>
+</header>
+
+<script>
+  (function() {
+    var header = document.querySelector('.magic-header-{{ section.id }}');
+    if (!header) return;
+    var toggleBtn = header.querySelector('.magic-header__toggle');
+    var drawer = header.querySelector('.magic-header__drawer');
+    if (toggleBtn && drawer) {
+      toggleBtn.addEventListener('click', function() {
+        var isOpen = drawer.classList.toggle('is-open');
+        toggleBtn.setAttribute('aria-expanded', isOpen);
+      });
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Magic Header",
+  "tag": "header",
+  "class": "section-magic-header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo_image",
+      "label": "Logo Image"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Header Menu"
+    },
+    {
+      "type": "header",
+      "content": "Default Nav Links (Fallback)"
+    },
+    {
+      "type": "text",
+      "id": "link_1_title",
+      "label": "Link 1 Title",
+      "default": "Shop"
+    },
+    {
+      "type": "url",
+      "id": "link_1_url",
+      "label": "Link 1 URL"
+    },
+    {
+      "type": "text",
+      "id": "link_2_title",
+      "label": "Link 2 Title",
+      "default": "Science"
+    },
+    {
+      "type": "url",
+      "id": "link_2_url",
+      "label": "Link 2 URL"
+    },
+    {
+      "type": "text",
+      "id": "link_3_title",
+      "label": "Link 3 Title",
+      "default": "Reviews"
+    },
+    {
+      "type": "url",
+      "id": "link_3_url",
+      "label": "Link 3 URL"
+    },
+    {
+      "type": "header",
+      "content": "Right Actions"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_account",
+      "label": "Show account icon",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#FFFFFF"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Magic Header"
+    }
+  ]
+}
+{% endschema %}

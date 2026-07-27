@@ -1,0 +1,767 @@
+{%- style -%}
+  @font-face {
+    font-family: 'Circular Std';
+    src: local('Circular Std Bold'), local('CircularStd-Bold'), local('Circular Std'), local('CircularStd');
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  .bundle-banner--{{ section.id }} {
+    --bb-font: 'Circular Std', 'CircularStd', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --bb-pt: {{ section.settings.padding_top }}px;
+    --bb-pb: {{ section.settings.padding_bottom }}px;
+    --bb-card-bg: {{ section.settings.card_bg_color | default: '#FFFFFF' }};
+    --bb-text: {{ section.settings.text_color | default: '#1A1A1A' }};
+    --bb-btn-bg: {{ section.settings.button_bg_color | default: '#000000' }};
+    --bb-btn-text: {{ section.settings.button_text_color | default: '#FFFFFF' }};
+    --bb-accent: {{ section.settings.accent_color | default: '#00A884' }};
+    --bb-star: {{ section.settings.star_color | default: '#FF758F' }};
+    font-family: var(--bb-font);
+  }
+
+  .bundle-banner--{{ section.id }} .bundle-banner__hero {
+    position: relative;
+    width: 100%;
+    background: {{ section.settings.bg_color | default: 'linear-gradient(135deg, #FBEBD9 0%, #F5D9E5 40%, #EAE0F5 100%)' }};
+    {% if section.settings.background_image != blank %}
+      background-image: url('{{ section.settings.background_image | image_url: width: 2000 }}');
+      background-size: cover;
+      background-position: center;
+    {% endif %}
+    padding-top: var(--bb-pt);
+    padding-bottom: var(--bb-pb);
+    overflow: hidden;
+  }
+
+  .bundle-banner--{{ section.id }} .bundle-banner__container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    align-items: center;
+  }
+
+  @media (min-width: 768px) and (max-width: 1199px) {
+    .bundle-banner--{{ section.id }} .bundle-banner__container {
+      padding: 0 24px;
+      gap: 40px;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .bundle-banner--{{ section.id }} .bundle-banner__container {
+      padding: 0 60px;
+      display: grid;
+      grid-template-columns: minmax(580px, 685px) 1fr;
+      align-items: center;
+      gap: 48px;
+    }
+  }
+
+  .bundle-banner--{{ section.id }} .bundle-banner__card {
+    background-color: var(--bb-card-bg);
+    border-radius: 20px;
+    padding: 24px 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    z-index: 2;
+    width: 100%;
+    max-width: 685px;
+    box-sizing: border-box;
+  }
+
+  @media (min-width: 768px) {
+    .bundle-banner--{{ section.id }} .bundle-banner__card {
+      border-radius: 24px;
+      padding: 40px 36px;
+      gap: 20px;
+    }
+  }
+
+  .bundle-banner--{{ section.id }} .bundle-banner__rating-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    order: 1;
+  }
+
+  .bundle-banner--{{ section.id }} .bundle-banner__stars {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+  }
+
+  .bundle-banner--{{ section.id }} .bundle-banner__stars svg {
+    width: 14px;
+    height: 14px;
+    fill: var(--bb-star);
+  }
+
+  .bundle-banner--{{ section.id }} .bundle-banner__rating-text {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: #4A4A4A;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  @media (min-width: 990px) {
+    .bundle-banner--{{ section.id }} .bundle-banner__rating-text {
+      font-size: 13px;
+    }
+  }
+
+  .bundle-banner--{{ section.id }} .bundle-banner__heading {
+    margin: 0;
+    font-family: 'Circular Std', 'CircularStd', var(--bb-font);
+    font-size: 30px;
+    line-height: 1.2;
+    font-weight: 700;
+    color: var(--bb-text);
+    letter-spacing: 0px;
+    order: 2;
+  }
+
+  .bundle-banner--{{ section.id }} .bundle-banner__heading em {
+    font-style: italic;
+    font-weight: 700;
+    font-family: inherit;
+  }
+
+  @media (min-width: 990px) {
+    .bundle-banner--{{ section.id }} .bundle-banner__heading {
+      font-size: 48px;
+    }
+  }
+
+  .bundle-banner--{{ section.id }} .bundle-banner__subheading {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #333333;
+    order: 3;
+  }
+
+  @media (min-width: 990px) {
+    .bundle-banner--{{ section.id }} .bundle-banner__subheading {
+      font-size: 15px;
+    }
+  }
+
+  .bundle-banner--{{ section.id }} .bundle-banner__cta-wrapper {
+    margin-top: 4px;
+    order: 4;
+  }
+
+  .bundle-banner--{{ section.id }} .bundle-banner__cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 16px 20px;
+    background-color: var(--bb-btn-bg);
+    color: var(--bb-btn-text);
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+    box-sizing: border-box;
+    text-align: center;
+  }
+
+  .bundle-banner--{{ section.id }} .bundle-banner__cta:hover {
+    background-color: #222222;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  @media (min-width: 990px) {
+    .bundle-banner--{{ section.id }} .bundle-banner__cta {
+      font-size: 13px;
+      padding: 18px 24px;
+    }
+  }
+
+  .bundle-banner--{{ section.id }} .bundle-banner__guarantee {
+    margin: 0;
+    font-size: 11px;
+    color: #666666;
+    text-align: center;
+    line-height: 1.4;
+    order: 5;
+  }
+
+  @media (min-width: 990px) {
+    .bundle-banner--{{ section.id }} .bundle-banner__guarantee {
+      font-size: 12px;
+    }
+  }
+
+  .bundle-banner--{{ section.id }} .bundle-banner__benefits {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    order: 6;
+  }
+
+  .bundle-banner--{{ section.id }} .bundle-banner__benefit-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #222222;
+    line-height: 1.4;
+  }
+
+  @media (min-width: 990px) {
+    .bundle-banner--{{ section.id }} .bundle-banner__benefits {
+      order: 4;
+    }
+    .bundle-banner--{{ section.id }} .bundle-banner__cta-wrapper {
+      order: 5;
+    }
+    .bundle-banner--{{ section.id }} .bundle-banner__guarantee {
+      order: 6;
+    }
+    .bundle-banner--{{ section.id }} .bundle-banner__benefit-item {
+      font-size: 14px;
+    }
+  }
+
+  .bundle-banner--{{ section.id }} .bundle-banner__check-icon {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: var(--bb-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+  }
+
+  .bundle-banner--{{ section.id }} .bundle-banner__check-icon svg {
+    width: 11px;
+    height: 11px;
+    stroke: #FFFFFF;
+    stroke-width: 2.5;
+    fill: none;
+  }
+
+  .bundle-banner--{{ section.id }} .bundle-banner__graphic-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  .bundle-banner--{{ section.id }} .bundle-banner__product-img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+  }
+
+  @media (min-width: 768px) {
+    .bundle-banner--{{ section.id }} .bundle-banner__product-img {
+      max-width: 580px;
+      width: 100%;
+    }
+  }
+
+  .bundle-banner--{{ section.id }} .bundle-banner__badge {
+    position: absolute;
+    bottom: -10px;
+    right: 10px;
+    width: 90px;
+    height: 90px;
+    pointer-events: none;
+    z-index: 3;
+    animation: bb-spin 25s linear infinite;
+  }
+
+  @keyframes bb-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  @media (min-width: 768px) {
+    .bundle-banner--{{ section.id }} .bundle-banner__badge {
+      bottom: 20px;
+      right: 20px;
+      width: 120px;
+      height: 120px;
+    }
+  }
+
+  .bundle-banner--{{ section.id }} .bundle-banner__ticker-bar {
+    width: 100%;
+    background-color: #FFFFFF;
+    border-top: 1px solid #E5E5E5;
+    border-bottom: 1px solid #E5E5E5;
+    padding: 14px 0;
+    overflow: hidden;
+    position: relative;
+    box-sizing: border-box;
+  }
+
+  .bundle-banner--{{ section.id }} .bundle-banner__ticker-track {
+    display: flex;
+    width: max-content;
+    animation: bb-ticker-scroll 25s linear infinite;
+  }
+
+  .bundle-banner--{{ section.id }} .bundle-banner__ticker-track:hover {
+    animation-play-state: paused;
+  }
+
+  .bundle-banner--{{ section.id }} .bundle-banner__ticker-content {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    padding-right: 32px;
+  }
+
+  .bundle-banner--{{ section.id }} .bundle-banner__ticker-content[aria-hidden="true"] {
+    display: flex;
+  }
+
+  @keyframes bb-ticker-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .bundle-banner--{{ section.id }} .bundle-banner__ticker-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Courier New', Courier, monospace, sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: #1A1A1A;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  @media (min-width: 990px) {
+    .bundle-banner--{{ section.id }} .bundle-banner__ticker-bar {
+      padding: 16px 0;
+    }
+
+    .bundle-banner--{{ section.id }} .bundle-banner__ticker-track {
+      animation: none;
+      width: 100%;
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 60px;
+      justify-content: space-around;
+      box-sizing: border-box;
+    }
+
+    .bundle-banner--{{ section.id }} .bundle-banner__ticker-content {
+      width: 100%;
+      justify-content: space-around;
+      gap: 24px;
+      padding-right: 0;
+    }
+
+    .bundle-banner--{{ section.id }} .bundle-banner__ticker-content[aria-hidden="true"] {
+      display: none;
+    }
+
+    .bundle-banner--{{ section.id }} .bundle-banner__ticker-item {
+      font-size: 14px;
+    }
+  }
+{%- endstyle -%}
+
+<section class="bundle-banner bundle-banner--{{ section.id }}" id="BundleBanner-{{ section.id }}">
+  <div class="bundle-banner__hero">
+    <div class="bundle-banner__container">
+      
+      <div class="bundle-banner__card">
+        
+        {% if section.settings.show_rating %}
+          <div class="bundle-banner__rating-row">
+            <div class="bundle-banner__stars" aria-label="{{ section.settings.review_rating }} stars">
+              {% for i in (1..5) %}
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+                </svg>
+              {% endfor %}
+            </div>
+            <span class="bundle-banner__rating-text">
+              {{ section.settings.review_rating | escape }} | {{ section.settings.review_count_text | escape }}
+            </span>
+          </div>
+        {% endif %}
+
+        {% if section.settings.heading != blank %}
+          <h2 class="bundle-banner__heading">
+            {{ section.settings.heading }}
+          </h2>
+        {% endif %}
+
+        {% if section.settings.subheading != blank %}
+          <p class="bundle-banner__subheading">
+            {{ section.settings.subheading | escape }}
+          </p>
+        {% endif %}
+
+        {% assign benefit_blocks = section.blocks | where: 'type', 'benefit' %}
+        {% if benefit_blocks.size > 0 %}
+          <ul class="bundle-banner__benefits" role="list">
+            {% for block in benefit_blocks %}
+              <li class="bundle-banner__benefit-item" {{ block.shopify_attributes }}>
+                <span class="bundle-banner__check-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                </span>
+                <span>{{ block.settings.text | escape }}</span>
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+
+        {% if section.settings.cta_label != blank %}
+          <div class="bundle-banner__cta-wrapper">
+            <a 
+              href="{{ section.settings.cta_url | default: '#' }}" 
+              class="bundle-banner__cta"
+              {% if section.settings.cta_url == blank %}role="button" aria-disabled="true"{% endif %}
+            >
+              <span>{{ section.settings.cta_label | escape }}</span>
+            </a>
+          </div>
+        {% endif %}
+
+        {% if section.settings.guarantee_text != blank %}
+          <p class="bundle-banner__guarantee">
+            {{ section.settings.guarantee_text | escape }}
+          </p>
+        {% endif %}
+
+      </div>
+
+      <div class="bundle-banner__graphic-container">
+        {% if section.settings.product_image != blank %}
+          {{ section.settings.product_image | image_url: width: 1200 | image_tag: 
+            class: 'bundle-banner__product-img',
+            loading: 'lazy',
+            alt: section.settings.product_image.alt | default: 'Magic Mind Shot Bottles' | escape 
+          }}
+        {% else %}
+          <img 
+            src="{{ 'bundle-banner-product.png' | asset_url }}" 
+            alt="Magic Mind Shot Bottles" 
+            class="bundle-banner__product-img"
+            loading="lazy"
+            width="580"
+            height="500"
+          >
+        {% endif %}
+
+        {% if section.settings.show_badge %}
+          <div class="bundle-banner__badge">
+            {% if section.settings.badge_image != blank %}
+              {{ section.settings.badge_image | image_url: width: 300 | image_tag:
+                loading: 'lazy',
+                alt: 'Benefits Compound With Daily Use' | escape
+              }}
+            {% else %}
+              <img 
+                src="{{ 'bundle-banner-badge.png' | asset_url }}" 
+                alt="Benefits Compound With Daily Use" 
+                loading="lazy"
+                width="120"
+                height="120"
+              >
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+
+    </div>
+  </div>
+
+  {% assign ticker_blocks = section.blocks | where: 'type', 'ticker_item' %}
+  {% if ticker_blocks.size > 0 %}
+    <div class="bundle-banner__ticker-bar">
+      <div class="bundle-banner__ticker-track">
+        <div class="bundle-banner__ticker-content">
+          {% for block in ticker_blocks %}
+            <div class="bundle-banner__ticker-item" {{ block.shopify_attributes }}>
+              <span class="bundle-banner__check-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+              </span>
+              <span>{{ block.settings.text | escape }}</span>
+            </div>
+          {% endfor %}
+        </div>
+        <div class="bundle-banner__ticker-content" aria-hidden="true">
+          {% for block in ticker_blocks %}
+            <div class="bundle-banner__ticker-item">
+              <span class="bundle-banner__check-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+              </span>
+              <span>{{ block.settings.text | escape }}</span>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Bundle Banner",
+  "tag": "section",
+  "class": "section-bundle-banner",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Rating Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "label": "Show rating header",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "review_rating",
+      "label": "Rating score",
+      "default": "4.7"
+    },
+    {
+      "type": "text",
+      "id": "review_count_text",
+      "label": "Rating count text",
+      "default": "1,700+ VERIFIED REVIEWS"
+    },
+    {
+      "type": "header",
+      "content": "Content Settings"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Your Brain Isn't Broken. <em>It's Just Been Running on the Wrong Fuel</em>"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading / Body text",
+      "default": "Brain fog, procrastination, the 3pm wall, these aren't signs that something's wrong with you. They're signs that what you're drinking to fix them is making them worse. Here's what's actually happening, and what 32,000+ people do about it every morning."
+    },
+    {
+      "type": "header",
+      "content": "Call to Action"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA button label",
+      "default": "TRY IT RISK-FREE — 50% OFF YOUR FIRST ORDER →"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA button link"
+    },
+    {
+      "type": "text",
+      "id": "guarantee_text",
+      "label": "Guarantee subtext",
+      "default": "100-Day Money-Back Guarantee • Free Shipping • Cancel anytime in 3 clicks"
+    },
+    {
+      "type": "header",
+      "content": "Images"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Custom Background Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "product_image",
+      "label": "Product Image (3 Bottles)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_badge",
+      "label": "Show rotating trust badge",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "badge_image",
+      "label": "Trust Badge Image"
+    },
+    {
+      "type": "header",
+      "content": "Color Customization"
+    },
+    {
+      "type": "color",
+      "id": "card_bg_color",
+      "label": "Card background color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Heading text color",
+      "default": "#1A1A1A"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Button background color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Checkmark icon background color",
+      "default": "#00A884"
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "label": "Rating star color",
+      "default": "#FF758F"
+    },
+    {
+      "type": "header",
+      "content": "Section Layout & Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 40
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Benefit text",
+          "default": "Calm, focused energy for 7+ hours, without the crash†"
+        }
+      ]
+    },
+    {
+      "type": "ticker_item",
+      "name": "Ticker Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Ticker text",
+          "default": "10 years of research"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bundle Banner (After V1)",
+      "blocks": [
+        {
+          "type": "benefit",
+          "settings": {
+            "text": "Calm, focused energy for 7+ hours, without the crash†"
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "text": "Procrastination and brain fog that lift, not just mask*"
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "text": "Stress that actually decreases over time†"
+          }
+        },
+        {
+          "type": "ticker_item",
+          "settings": {
+            "text": "10 years of research"
+          }
+        },
+        {
+          "type": "ticker_item",
+          "settings": {
+            "text": "Third-party tested"
+          }
+        },
+        {
+          "type": "ticker_item",
+          "settings": {
+            "text": "Patented formula"
+          }
+        },
+        {
+          "type": "ticker_item",
+          "settings": {
+            "text": "Clinically-backed ingredients"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
