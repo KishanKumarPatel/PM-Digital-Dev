@@ -6,10 +6,18 @@ This project adds a reusable Shopify Product Page (PDP) section that displays a 
 
 The implementation is built as a standalone Shopify section and can be added to any Product Detail Page without affecting the existing layout.
 
+Loom Viedo: https://www.loom.com/share/9ef68e6b860640a3af0d9dcbd6a6b1d4
+
 Preview link: https://pm-digital-iqxsuzad.myshopify.com/?_ab=0&_bt=eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaEpJaVp3YlMxa2FXZHBkR0ZzTFdseGVITjFlbUZrTG0xNWMyaHZjR2xtZVM1amIyMEdPZ1pGVkE9PSIsImV4cCI6IjIwMjYtMDctMjdUMDQ6NDM6NTcuNzEyWiIsInB1ciI6InBlcm1hbmVudF9wYXNzd29yZF9ieXBhc3MifX0%3D--b725be3cd598a8e9051f566daaf8d33c844c5a04&_fd=0&_sc=1&key=96c1a8a2164dd70aff11028689810b54b8656d1e0a5b9bd73614d913a1258be5&preview_theme_id=192453542154
+
+Variant A: https://pm-digital-iqxsuzad.myshopify.com/?ig-preview=e67e8357-1a69-4936-9b5c-6890ba7e3914&igTg=ae26c37a-fa54-429b-8cc9-89cad7cc91c5&preview_theme_id=192453542154&pb=0
+
+Variant B: https://pm-digital-iqxsuzad.myshopify.com/?ig-preview=e67e8357-1a69-4936-9b5c-6890ba7e3914&igTg=dd47e48f-9bd2-4ab6-aaba-cb03e6bca357&preview_theme_id=192453542154&pb=0
 
 Password: gayglo
 Product Page: https://pm-digital-iqxsuzad.myshopify.com/products/physical-product-the-band-t-shirt
+
+
 
 ---
 
